@@ -843,11 +843,11 @@ class cli:
         elif ui == 'tests':
             del(self.args[1:3]) # args interfere with call to unittest.main()
             demo = Demonstrate()
-            if not mod or mod == 't':
+            if not mod or mod == '-t':
                 demo.test_demo()
-            if not mod or mod == 'a':
+            if not mod or mod == '-a':
                 demo.assignment_questions(verbose='summary')
-            if not mod or mod == 'd':
+            if not mod or mod == '-d':
                 demo.general_demo()
             del(demo)
             return
