@@ -239,8 +239,7 @@ class Calculator:
         '''
         caller : noteval(), showtime()
         input  : self; str, infix expression
-        action : evaluate a boolean infix expression to all possible truth values
-                 via postfix conversion and stack manipulation
+        action : evaluate a boolean infix expression to all possible truth values via postfix conversion and stack manipulation
         return : None. Print result to STDOUT
         '''
         seed_matrix = self.create_seed_matrix(len(self.unique_tokens)) # boolean seed values, altered in-place to generate return value
@@ -341,8 +340,8 @@ class Calculator:
                     rpn.append(op_stack.pop())
                 if op_stack.peek() == '(':
                     op_stack.pop()
-                if op_stack.peek() in operators:
-                    rpn.append(op_stack.pop())
+                # if op_stack.peek() in operators: // these two lines are wrong
+                #     rpn.append(op_stack.pop())   // typo! do not include.
                 continue
             elif token == ',':
                 while op_stack.peek() != '(':
@@ -903,7 +902,7 @@ class TestMainMethods(unittest.TestCase):
         self.assertEqual(Tests.evaluate_statement('1 + 3'), 4)
         self.assertEqual(Tests.evaluate_statement('6 ** 2 + 2 * 6 * 8 + 8 ** 2'), 196)
         self.assertEqual(Tests.evaluate_statement('((1 + 2) / 3) ** 4'), 1)
-        self.assertEqual(Tests.evaluate_statement('(1 + 2) * (3 / 4) ** (5 + 6)'), 7481.8276426792145)
+        self.assertEqual(Tests.evaluate_statement('(1 + 2) * (3 / 4) ** (5 + 6)'), 0.12670540809631348)
         self.assertEqual(Tests.evaluate_statement('((P1 & P2) | (P3 & true)) | ((!P1 & !P3) & P2)'), 'contingency')
         self.assertEqual(Tests.evaluate_statement('(NOT P1 AND (P1 OR P2)) IF P2'), 'tautology')
         self.assertEqual(Tests.evaluate_statement('P2 AND (P1 IF NOT P2) AND (NOT P1 IF NOT P2)'), 'contradiction')
